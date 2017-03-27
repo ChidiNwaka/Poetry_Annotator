@@ -1,6 +1,6 @@
 # Poetry_Annotator
 
-In this project, I had to write code that could be used to help poets confirm that their work meets pronunciation stress pattern rules and rhyme scheme rules.
+In this project, I wrote code to help poets confirm that their work meets pronunciation stress pattern rules and rhyme scheme rules.
 
 Developed by Chidi Nwaka
 
