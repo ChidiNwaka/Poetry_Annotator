@@ -1,4 +1,4 @@
-﻿he main module - need to import so that window code works correctly
+﻿# The main module - need to import so that window code works correctly
 import annotate_poetry
 import re
 
@@ -47,7 +47,7 @@ SMALL_PRONOUNCING_DICT = [
     'FOX F AA1 K S',
     'IN IH0 N',
     'SOCKS S AA1 K S']
-      
+
 
 # ===================== Provided Helper Functions =============================
 
@@ -57,7 +57,7 @@ def prepare_word(s):
     Return a new string based on s in which all letters have been converted to 
     uppercase and punctuation characters have been stripped from both ends. 
     Inner punctuation is left unchanged.
-    
+
     This function prepares a word for looking up in a pronouncing table.
 
     >>> prepare_word('Birthday!!!')
@@ -68,9 +68,9 @@ def prepare_word(s):
     "DON'T"
     """
 
-    # punctuation = """!"`@$%^&_+-={}|\\/—,;:'.-?)([]<>*#\n\t\r"""
-    # result = s.upper().strip(punctuation)
-    # return result
+    punctuation = """!"`@$%^&_+-={}|\\/—,;:'.-?)([]<>*#\n\t\r"""
+    result = s.upper().strip(punctuation)
+    return result
 
 
 def get_rhyme_scheme_letter(offset):
@@ -111,16 +111,16 @@ def get_word(pronouncing_line):
     >>> get_word ('FOX F AA1 K S')
     'FOX'
     """
-    
-    
-       # RETURN the first index of the string
-       #return all the chracters before there is a whitespace
-       # a word is a number of consecutive characters followed by a whitespace
-       # return characters until not ch.isspace    
+
+
+        # RETURN the first index of the string
+        #return all the chracters before there is a whitespace
+        # a word is a number of consecutive characters followed by a whitespace
+        # return characters until not ch.isspace    
     word = pronouncing_line.split(' ')[0]
-    
+
     #str = "'"+ word + "' get_word"
-    
+
     return word
 
 
@@ -142,13 +142,13 @@ def get_pronunciation(pronouncing_line):
     >>> get_pronunciation('FOX F AA1 K S')
     ['F', 'AA1', 'K', 'S']
     """
-    
+
     # To do: Add one docstring example above and fill in this function's
     #        body to meet its specification.
     # skip the first word, list at index [0]
     #return all the words after the first word
 
-    return pronouncing_line.split(" ") [1:]
+    return pronouncing_line.split() [1:]
 
 def make_pronouncing_table(pronouncing_list):
     """ (list of str) -> pronouncing table
@@ -164,13 +164,13 @@ def make_pronouncing_table(pronouncing_list):
     >>> make_pronouncing_table(['A AHO', 'BOX B AA1 K S'])
     [['A', 'BOX'], [['AHO'], ['B', 'AA1', 'K', 'S']]]
     """
-    
+
     #make two lists
     # the first list is a list of words
     #the seconding list is a list of pronouncing lines
     # i in words corresponds to i in pronouncing lines
     # open the pronouncing list at the same index as word from [i:]
-    
+
     ## make a list of the form 
 
     # To do: Add one docstring example above and fill in this function's
@@ -178,18 +178,18 @@ def make_pronouncing_table(pronouncing_list):
     list_of_words = []
     word_phoneme = []
     table = []
-    
+
     for word in pronouncing_list:
         split_word_into_a_list = word.split(" ")
         list_of_words.append(split_word_into_a_list[0])
         word_phoneme.append(split_word_into_a_list[1:])
-       
-    
+
+
     table.append(list_of_words)
     table.append(word_phoneme)
-    
+
     return table
-        
+
 
 
 def look_up_pronunciation(word, pronouncing_table):
@@ -202,58 +202,25 @@ def look_up_pronunciation(word, pronouncing_table):
     >>> pronouncing_table = SMALL_TABLE
     >>> look_up_pronunciation("Don't!", pronouncing_table)
     ['D', 'OW1', 'N', 'T']
+
     >>> look_up_pronunciation("!CONSISTENT!", pronouncing_table)
     ['K', 'AH0', 'N', 'S', 'IH1', 'S', 'T', 'AH0', 'N', 'T']
     """
     # To do: Add one docstring example above and fill in this function's
         #        body to meet its specification.
-        
-        
-        #print "firstList: ", pronouncing_table[0][0]
-        #for  word in pronouncing_table[0]:
-            #print(word)
-        #position = first_list[0].index(word)
-        
-        #if position > -1:
-            #return pronouncing_table[1][position + 1]
-        #else:
-            #return 0
-            
-    word = word.upper() # Converts word to upper case.
-    #word = re.sub('[!]', '', word) # Ignores any punchation in word.
-    word = word.strip('!')
-    
+
+
+    word = prepare_word(word)
+
     if (word in pronouncing_table[0]):
-        
+
         position = pronouncing_table[0].index(word)
-        
+
         return pronouncing_table[1][position]
+
     else:
         return []
-    #word= word.upper()
-    
-    #CHANGE TO upper case and alphanumeric
-    
-    #new_word = ''
-    
-    #for ch in word: 
-        #if (ch.isalpha() or (ch == "'")): 
-            #new_word += ch
-         
-    #if position > -1:
-            #return pronouncing_table[1][position + 1]
-    #else:
-        #return 0
-   
-        
-        #pronouncing_table= make_pronouncing_table(pronouncing_table)
-        
-        #for word in pronouncing_table:
-            #if word in make_pronouncing_table(pronouncing_table):
-                
-                #return pronouncing_line
-    
- 
+
 
 def is_vowel_phoneme(s):
     """ (str) -> bool
@@ -265,26 +232,22 @@ def is_vowel_phoneme(s):
 
     >>> is_vowel_phoneme("AE0")
     True
-    >>> is vowel_phoneme("AA1")
-    True
-    >>> is_vowel_phoneme("AE0t")
+
+    >>> is_vowel_phoneme("AEt")
     False
     """
-    
+
     if len(s) != 3:
         return False
-    
+
     else:
-               
+
         if ((s[0] in "AEIOU") and (s[1].isupper()) and (s[2].isdigit())):
-                       
+
             return True
 
     return False
-            
-         
-            
-        
+
 
     # To do: Add one docstring example above and fill in this function's
     #        body to meet its specification.
@@ -298,38 +261,33 @@ def last_syllable(phoneme_list):
 
     >>> last_syllable(['K', 'AH0', 'N', 'S', 'IH1', 'S', 'T', 'AH0', 'N', 'T'])
     ['AH0', 'N', 'T']
-    
+
     last_syllable(['B', 'AA1', 'K', 'S'])
     ['AA1', 'K', 'S']
-    
+
     >>> last_syllable(['B', 'K', 'S'])   # without a vowel phoneme
     []
     """
 
     # To do: Add one docstring example above and fill in this function's
     #        body to meet its specification.
-        
+
     index = len(phoneme_list) - 1
-    
-    
+
+
     while (not is_vowel_phoneme(phoneme_list[index])) and index >= 0:
         index -= 1
-        
+
     # if there are no vowels in phoneme list, return []    
+
     if index < 0:
+
         return []
-    
-    
+
+
     return phoneme_list[index:]   
 
-      
-           
-    #the second code needs to return the rest of the characters in the string        
-       #for get_last_char in get_last_vowel:
-           #if get_last_char[-1] in phoneme_list:
-               #get_last_char.append    
-        
-  
+
 # Interested in why the next docstring starts with an r?
 # See section 2.4.1:
 # 3
@@ -343,23 +301,26 @@ def convert_to_lines(poem):
 
     >>> convert_to_lines(SMALL_POEM)
     ["I'll sit here instead,", '', 'A cloud on my head']
-     
+
+    >>> convert_to_lines("\nTofu is sweet,\nTastes better than meat\n\n")
+    ['Tofu is sweet,', '', 'Tastes better than meat']
+
     """
-    
+
     divided_poem= []
-    output = poem.split("\n")
-    
+    output = poem.split('\n')
+
     for word in output:
+
         if word: 
             divided_poem.append(word)
             divided_poem.append('')
-                
+
     return divided_poem[:-1]
 
-#fix quotation issue
 
-# To do: Add one docstring example above and fill in this function's
-#        body to meet its specification.
+    # To do: Add one docstring example above and fill in this function's
+    #body to meet its specification.
 
 
 def detect_rhyme_scheme(poem_lines, pronouncing_table):
@@ -375,58 +336,60 @@ def detect_rhyme_scheme(poem_lines, pronouncing_table):
     >>> poem_lines = ["Don't, in box!", '', 'Fox in socks.', 'Consistent.']
     >>> detect_rhyme_scheme(poem_lines, pronouncing_table)
     ['A', ' ', 'A', 'B']
+
+    >>> pronouncing_table = SMALL_TABLE
+    >>> poem_lines = ["You are a fox!",'You rock my socks.','', 'You fox.']
+    >>> detect_rhyme_scheme(poem_lines, pronouncing_table)
+    ['A',  'A',' ', 'A']
     """
 
     # To do: Add one docstring example above and fill in this function's
     #        body to meet its specification.
-    
-      
-    rhyme_scheme_pattern= []
-    annotate_poem= [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 
-                     'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 
-                     'X','Y', 'Z' ]
-    line= 0
-    
-    # this code gets each individual poem line for example ['cats','are','evil']
-    # it will return cats
-    
+
+    rhyme_scheme_pattern = []
+    list_of_word_phoneme = []
+
+
+    offset = 0;
+
     for line in poem_lines:
-        line= poem_lines[line][:]
-        line +=1
-             
-    # this code is to get the last word of the line
-    last_word=[]
- 
-    for ch in line:
-        if not ch.isspace():
-            last_word = ch.append(last_word)
-        
-    #this is the code to get the last word of every poem line and its value
-    #in the pronounciation_table 
-    
-    for last_word in line:
-        if last_word in pronouncing_table[0]:
-            index_last_word = pronouncing_table[0][last_word.index]
-                           
-     #this is the code to get the pronounciation scheme of the last word
-  
-    for phoneme_last_word in pronouncing_table:
-                
-                phoneme_last_word == index_last_word
-                
-              
-    # this is the code to get the rhyme scheme, appended into a list
-    
-    for rhyme_pattern in poem_lines:
-        for alpha in annotate_poem:
-            if last_word == last_word[1]:
-                
-                rhyme_scheme.append(alpha)
-              
-    return rhyme_scheme_pattern   
-    
- 
- 
+
+        line = ' '.join(line.split())
+
+        if line != '':
+            last_word = line.split()[-1]
+
+            last_word = prepare_word(last_word)        
+
+            word_phoneme = look_up_pronunciation(last_word, pronouncing_table) 
+
+        if len(word_phoneme) > 0:
+
+            if word_phoneme in pronouncing_table[1]:
+
+                if word_phoneme in list_of_word_phoneme: 
+
+                    prev_index = list_of_word_phoneme.index(word_phoneme)
+
+                    ch = rhyme_scheme_pattern[prev_index]
+
+
+
+                elif line: 
+                    rhyme_scheme_pattern.append(get_rhyme_scheme_letter(offset))
+                    list_of_word_phoneme.append(word_phoneme)
+                    offset += 1                       
+
+
+                elif line == " ":
+                    rhyme_scheme_pattern.append(' ')
+                    offset -= 1
+
+
+                    return rhyme_scheme_pattern       
+
+
+
 def get_stress_pattern(word, pronouncing_table):
     """ (str, pronouncing table) -> str
 

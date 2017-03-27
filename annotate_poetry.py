@@ -2,8 +2,8 @@
 import stress_and_rhyme_functions as student
 
 # The Graphical User Interface (GUI) module - so we can display in new window
-from tkinter import *
-from tkinter.filedialog import askopenfilename
+from Tkinter import *
+#from Tkinter.filedialog import askopenfilename
 
 # The OS module - so we can determine whether or not a file is in folder
 import os
