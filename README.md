@@ -9,6 +9,6 @@ Developed by:
 
 Chidi Nwaka
 
-Refer to handout.pdf <a href="https://github.com/ChidiNwaka/Poetry_Annotator/blob/master/handout.pdf"> for a more detailed explanation of this projects tasks.
+Refer to the <a href="https://github.com/ChidiNwaka/Poetry_Annotator/blob/master/handout.pdf">handout.pdf</a> for a more detailed explanation of this projects tasks.
 
 
