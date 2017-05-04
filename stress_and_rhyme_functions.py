@@ -1,4 +1,4 @@
-﻿he main module - need to import so that window code works correctly
+#The main module - need to import so that window code works correctly
 import annotate_poetry
 import re
 
